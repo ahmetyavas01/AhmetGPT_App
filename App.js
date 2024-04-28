@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text, Alert, StyleSheet, ScrollView, StatusBar, SafeAreaView, Pressable } from 'react-native';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = 'AIzaSyCJx4kxQ8FGVA20_MhQ3eoPOo6tzcdEiec';
+const API_KEY = 'API_KEY';
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 const App = () => {
