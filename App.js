@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Alert, StyleSheet, ScrollView, StatusBar, SafeAreaView, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, TextInput, Button, Text, Alert, StyleSheet, ScrollView, StatusBar, SafeAreaView, ActivityIndicator, TouchableOpacity ,} from 'react-native';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Ionicons } from '@expo/vector-icons';
+import { Clipboard } from 'expo';
+
 
 const API_KEY = 'API_KEY';
 const genAI = new GoogleGenerativeAI(API_KEY);
@@ -25,7 +27,11 @@ const App = () => {
       setLoading(false);
     }
   };
-
+  const copyToClipboard = () => {
+    Clipboard.setString(response);
+    Alert.alert('Copied', 'Response copied to clipboard!');
+  };
+  
   const handleGenerateText = () => {
     generateText(prompt);
   };
@@ -50,7 +56,7 @@ const App = () => {
           marginLeft: 10
         }}>
           <TouchableOpacity onPress={handleGenerateText}>
-            <Ionicons name="send" size={25} color="gray" />
+            <Ionicons name="send" size={25} color="white" />
           </TouchableOpacity>
         </View>
       </View>
@@ -61,6 +67,12 @@ const App = () => {
         </View>
       ) : response !== '' ? (
         <ScrollView>
+          <Text style={styles.questionText}>➡️Message : {prompt}</Text>
+          <View style={{flexDirection:'row'}}>
+          <Text style={styles.resultText}>⬇️Response⬇️</Text>
+
+          </View>
+         
           <Text style={styles.resultText}>{response}</Text>
         </ScrollView>
       ) : null}
@@ -81,12 +93,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
     marginTop: 30,
-    margin: 20
   },
   TextInput: {
     width: '90%',
     height: 50,
-    paddingHorizontal: 17,
+    paddingHorizontal: 20,
     paddingVertical: 12,
     borderRadius: 22,
     backgroundColor: 'rgb(51, 59, 76)',
@@ -100,23 +111,26 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: 'white',
     marginHorizontal: 35,
+    margin:5
+  },
+  questionText: {
+    fontSize: 20,
+    fontWeight: '500',
+    color: 'white',
+    marginHorizontal: 35,
     marginVertical: 20
   },
   activityIndicatorContainer: {
     flex:0.7,
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     width: '90%',
-    alignSelf: 'center',
-    marginTop: 10,
-  }
-
+    alignSelf: 'center', 
+  },
 });
 
 export default App;
