@@ -6,7 +6,7 @@ import { Clipboard } from 'expo';
 import Header from './components/Header';
 import Loading from './components/Loading'
 
-const API_KEY = 'AIzaSyBKluYrmRS2bNAm3OXaaYDJFnfD2NujB3A';
+const API_KEY = 'api_key';
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 const App = () => {
